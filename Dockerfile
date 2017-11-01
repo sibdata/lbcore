@@ -20,6 +20,12 @@ RUN yum update -y \
 
 && cp -f /etc/billing.conf /root/billing
 
-## VOLUME "/root/billing"
+ADD scripts/cp_conf_logs.sh /
+
+VOLUME "/root/billing/logs"
+
+VOLUME "/root/billing/conf"
+
+## ENTRYPOINT ["/cp_conf_logs.sh"]
 
 CMD ["/usr/local/billing/LBcore","-n","-c","/root/billing/billing.conf","-L","/root/billing/lbcore.log"]
