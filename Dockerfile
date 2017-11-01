@@ -22,4 +22,4 @@ RUN yum update -y \
 
 ## VOLUME "/root/billing"
 
-CMD ["/usr/local/billing/LBcore -n -c /root/billing/billing.conf -L /root/billing/lbcore.log"]
+CMD ["/usr/local/billing/LBcore","-n","-c","/root/billing/billing.conf","-L","/root/billing/lbcore.log"]
