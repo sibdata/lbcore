@@ -6,8 +6,6 @@ RUN yum update -y \
 
 && yum install epel-release -yq \
 
-&& yum install htop -yq \
-
 && yum install yum-utils -yq \
 
 && yum install mc -yq \
