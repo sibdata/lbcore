@@ -20,6 +20,6 @@ RUN yum update -y \
 
 && cp -f /etc/billing.conf /root/billing
 
-VOLUME "/root/billing"
+## VOLUME "/root/billing"
 
 CMD ["/usr/local/billing/LBcore -n -c /root/billing/billing.conf -L /root/billing/lbcore.log"]
