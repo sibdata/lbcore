@@ -4,11 +4,11 @@ MAINTAINER Sergey Ustyuzhanin SibData Company <dir@sibdata.ru>
 
 RUN yum update -y \
 
-&& yum install epel-release -yq \
+&& yum install epel-release -y -q \
 
-&& yum install yum-utils -yq \
+&& yum install yum-utils -y -q \
 
-&& yum install mc -yq \
+&& yum install mc -y -q \
 
 && mkdir -p /root/billing \
 
@@ -16,7 +16,7 @@ RUN yum update -y \
 
 && yum-config-manager --add-repo https://pkgs.lanbilling.ru/rpm/lb20/6/update/736962646174615f32/ef40a99ce87c941658eb5fc30461b49f33898ca0/lanbilling-2.0-hotfix.repo \
 
-&& yum install lbcore* -yq \
+&& yum install lbcore* -y -q \
 
 && echo "0" > /root/billing/installed.txt
 
