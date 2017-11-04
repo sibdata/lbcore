@@ -14,16 +14,16 @@ RUN yum update -y \
 
 && yum-config-manager --add-repo https://pkgs.lanbilling.ru/rpm/lb20/7/main/736962646174615f32/ef40a99ce87c941658eb5fc30461b49f33898ca0/lanbilling-2.0-release.repo \
 
-&& yum install lbcore-2.0.23* -yq \
+&& yum-config-manager --add-repo https://pkgs.lanbilling.ru/rpm/lb20/6/update/736962646174615f32/ef40a99ce87c941658eb5fc30461b49f33898ca0/lanbilling-2.0-hotfix.repo \
 
-&& cp -f /etc/billing.conf /root/billing
+&& yum install lbcore* -yq \
 
-ADD scripts/cp_conf_logs.sh /
+&& echo "0" > /root/billing/installed.txt
 
-VOLUME "/root/billing/logs"
+ADD scripts/start.sh /
 
-VOLUME "/root/billing/conf"
+VOLUME "/root/billing"
 
-## ENTRYPOINT ["/cp_conf_logs.sh"]
+ENTRYPOINT ["/start.sh"]
 
-CMD ["/usr/local/billing/LBcore","-n","-c","/root/billing/billing.conf","-L","/root/billing/lbcore.log"]
+CMD ["/usr/local/billing/LBcore","-n","-c","/root/billing/conf/billing.conf","-L","/root/billing/logs/lbcore.log"]
