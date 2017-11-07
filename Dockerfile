@@ -14,7 +14,7 @@ RUN yum install epel-release -y -q
 RUN yum install yum-utils -y -q
 RUN yum install expect -y -q
 RUN mkdir -p /root/billing
-yum-config-manager --add-repo https://pkgs.lanbilling.ru/rpm/lb20/7/main/736962646174615f32/ef40a99ce87c941658eb5fc30461b49f33898ca0/lanbilling-2.0-release.repo
+RUN yum-config-manager --add-repo https://pkgs.lanbilling.ru/rpm/lb20/7/main/736962646174615f32/ef40a99ce87c941658eb5fc30461b49f33898ca0/lanbilling-2.0-release.repo
 ##RUN yum localinstall lbcore* -y -q
 RUN yum install lbcore* -y -q
 RUN rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
