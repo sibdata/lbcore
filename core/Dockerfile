@@ -2,7 +2,14 @@ FROM centos:7
 
 MAINTAINER Sergey Ustyuzhanin SibData Company <dir@sibdata.ru>
 
-##COPY lbcore-2.0.23.0-203.gitf6ab08e1.el7.x86_64.rpm /
+#COPY distr/ /tmp
+
+RUN yum install wget -y
+
+RUN wget https://sibdata:sibdata2017@disk.sysadminsk.ru/remote.php/webdav/billing/lbcore-2.0.23.0-1.el7.x86_64.rpm \
+&& wget https://sibdata:sibdata2017@disk.sysadminsk.ru/remote.php/webdav/billing/lbarcd-2.0.23.0-1.el7.x86_64.rpm \
+&& wget https://sibdata:sibdata2017@disk.sysadminsk.ru/remote.php/webdav/billing/lbweb-admin-3.0.6-1.el7.centos.noarch.rpm \
+&& wget https://sibdata:sibdata2017@disk.sysadminsk.ru/remote.php/webdav/billing/lbweb-common-2.16.4-1.el7.centos.noarch.rpm
 
 RUN localedef -i ru_RU -f UTF-8 ru_RU.UTF-8
 
@@ -14,9 +21,9 @@ RUN yum install epel-release -y -q
 RUN yum install yum-utils -y -q
 RUN yum install expect -y -q
 RUN mkdir -p /root/billing
-RUN yum-config-manager --add-repo https://pkgs.lanbilling.ru/rpm/lb20/7/main/736962646174615f32/ef40a99ce87c941658eb5fc30461b49f33898ca0/lanbilling-2.0-release.repo
-##RUN yum localinstall lbcore* -y -q
-RUN yum install lbcore* -y -q
+##RUN yum-config-manager --add-repo https://pkgs.lanbilling.ru/rpm/lb20/7/main/736962646174615f32/ef40a99ce87c941658eb5fc30461b49f33898ca0/lanbilling-2.0-release.repo
+RUN yum localinstall lb* -y -q
+##RUN yum install lbcore* -y -q
 RUN rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
 RUN yum install mysql -y
 RUN sed -i "s|logfile = ./lbcore.log|logfile = /root/billing/logs/lbcore.log|" /etc/billing.conf

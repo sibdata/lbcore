@@ -25,9 +25,27 @@ services:
     volumes:
       - /root/billing/conf:/root/billing/conf
       - /root/billing/logs:/root/billing/logs
+      - /root/billing/www:/var/www/html
     env_file:
       - system.env
       - mysql.env
       - lbcore.env
     networks:
+      back:
+        aliases:
+          - soap
+    ports:
+      - "34012:34012"
+  web:
+    image: sibdata/lanbilling-web
+    restart: always
+    depends_on:
+      - core
+    volumes:
+      - /root/billing/www:/usr/local/apache2/htdocs
+    env_file:
+      - system.env
+    networks:
       - back
+    ports:
+      - "80:80"
