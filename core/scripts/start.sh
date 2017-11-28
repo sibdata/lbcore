@@ -22,23 +22,14 @@ cp -r /usr/local/billing/phpclient/*  /var/www/html/
 /usr/bin/expect<<EOF
     log_user 1
     set timeout 1000
-    spawn mysql -u$MYSQL_USER -p $MYSQL_DATABASE -h $MYSQL_HOST -e "INSERT INTO \`trusted\` (trusted_id, \`trusted_ip\`, \`trusted_mask\`, \`trusted_descr\`) VALUES (2, unhex('00000000000000000000ffff0A000000'), unhex('00000000000000000000ffffFF000000'), 'web-server');"
+    spawn mysql -u$MYSQL_USER -p $MYSQL_DATABASE -h $MYSQL_HOST -e "INSERT INTO \`trusted\` (trusted_id, \`trusted_ip\`, \`trusted_mask\`, \`trusted_descr\`) VALUES (2, unhex('00000000000000000000ffffAC000000'), unhex('00000000000000000000ffffFF000000'), 'docker');"
     expect "Enter password:"
     send "$MYSQL_PASSWORD\n"
     expect eof
 EOF
 
-/usr/bin/expect<<EOF
-    log_user 1
-    set timeout 1000
-    spawn mysql -u$MYSQL_USER -p $MYSQL_DATABASE -h $MYSQL_HOST -e "INSERT INTO \`trusted\` (trusted_id, \`trusted_ip\`, \`trusted_mask\`, \`trusted_descr\`) VALUES (3, unhex('00000000000000000000ffff0'), unhex('00000000000000000000ffff0'), 'web-server');"
-    expect "Enter password:"
-    send "$MYSQL_PASSWORD\n"
-    expect eof
-EOF
-
-sed -i "s|<SOAP:address location=\"http://127.0.0.1:34012\"/>|<SOAP:address location=\"http://10.2.3.4:34012\"/>|" /var/www/html/client2/client/soap/api3.wsdl
-sed -i "s|<SOAP:address location=\"http://127.0.0.1:34012\"/>|<SOAP:address location=\"http://10.2.3.4:34012\"/>|" /var/www/html/admin/soap/api3.wsdl
+sed -i "s|<SOAP:address location=\"http://127.0.0.1:34012\"/>|<SOAP:address location=\"http://soap:34012\"/>|" /var/www/html/client2/client/soap/api3.wsdl
+sed -i "s|<SOAP:address location=\"http://127.0.0.1:34012\"/>|<SOAP:address location=\"http://soap:34012\"/>|" /var/www/html/admin/soap/api3.wsdl
 
 fi
 
