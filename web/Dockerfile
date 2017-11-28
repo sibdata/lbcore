@@ -4,7 +4,7 @@ MAINTAINER Sergey Ustyuzhanin SibData Company <dir@sibdata.ru>
 
 ENV TZ Asia/Novosibirsk
 
-RUN apk --update --no-cache add apache2 py-simplejson php5 php5-soap gd tiff libpng php5-gd php5-mysql ghostscript php5-gmp php5-apache2
+RUN apk --update --no-cache add apache2 py-simplejson php5 php5-soap gd tiff libpng php5-gd php5-mysql ghostscript php5-gmp php5-apache2 php5-json
 
 RUN sed -i "s|max_execution_time = 30|max_execution_time = 3600|" /etc/php5/php.ini \
 && sed -i "s|default_socket_timeout = 60|default_socket_timeout = 3600|" /etc/php5/php.ini \
