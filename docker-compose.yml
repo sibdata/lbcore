@@ -18,7 +18,7 @@ services:
         aliases:
           - bill_db
   core:
-    image: blackojack/lbcore
+    image: blackojack/lanbilling:core
     restart: always
     depends_on:
       - db
@@ -37,7 +37,7 @@ services:
     ports:
       - "34012:34012"
   web:
-    image: blackojack/lanbilling-web
+    image: blackojack/lanbilling:web
     restart: always
     depends_on:
       - core
