@@ -3,9 +3,8 @@
 if [ "$(cat /root/billing/installed.txt)" != 1 ]
 then
   echo "1" > /root/billing/installed.txt
-  mkdir -p /root/billing/{conf,logs}
+  mkdir -p /root/billing/conf
   cp /etc/billing.conf /root/billing/conf/
-  touch /root/billing/logs/lbcore.log
   sed -i "s|database = mysql://billing:billing@127.0.0.1/billing|database = mysql://$MYSQL_USER:$MYSQL_PASSWORD@$MYSQL_HOST/$MYSQL_DATABASE|" /root/billing/conf/billing.conf
 sleep 20
 /usr/bin/expect<<EOF

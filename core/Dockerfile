@@ -18,7 +18,7 @@ RUN yum-config-manager --add-repo https://pkgs.lanbilling.ru/rpm/lb20/7/main/736
 RUN yum install lbcore* -y -q
 RUN rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
 RUN yum install mysql -y
-RUN sed -i "s|logfile = ./lbcore.log|logfile = /root/billing/logs/lbcore.log|" /etc/billing.conf
+RUN sed -i "s|logfile = ./lbcore.log|logfile = /dev/stdout|" /etc/billing.conf
 RUN sed -i "s|listen = 127.0.0.1:1502|listen = 0.0.0.0:1502|" /etc/billing.conf
 RUN echo "0" > /root/billing/installed.txt
 
@@ -28,4 +28,4 @@ VOLUME "/root/billing"
 
 ENTRYPOINT ["/start.sh"]
 
-CMD ["/usr/local/billing/LBcore","-n","-c","/root/billing/conf/billing.conf","-L","/root/billing/logs/lbcore.log"]
+CMD ["/usr/local/billing/LBcore","-n","-c","/root/billing/conf/billing.conf","-L","/dev/stdout"]

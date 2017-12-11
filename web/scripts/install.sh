@@ -6,6 +6,7 @@ Alias /client /usr/local/apache2/htdocs/client2/client/public/
 Options FollowSymLinks
 AllowOverride All
 Require all granted
+ErrorLog /dev/stdout
 </Directory>
 EOF
 
@@ -15,5 +16,6 @@ Alias /admin /usr/local/apache2/htdocs/admin/
 Options FollowSymLinks
 AllowOverride All
 Require all granted
+ErrorLog /dev/stdout
 </Directory>
 EOF
