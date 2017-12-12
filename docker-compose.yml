@@ -9,7 +9,7 @@ services:
     restart: always
     image: mysql:5.6
     volumes:
-      - ./billing/mysql:/var/lib/mysql
+      - ../lbcore_data/billing/mysql:/var/lib/mysql
     env_file:
       - system.env
       - mysql.env
@@ -18,14 +18,13 @@ services:
         aliases:
           - bill_db
   core:
-    image: blackojack/lanbilling:core
+    build: ./core
     restart: always
     depends_on:
       - db
     volumes:
-      - ./billing/conf:/root/billing/conf
-      - ./billing/logs:/root/billing/logs
-      - ./billing/www:/var/www/html
+      - ../lbcore_data/billing/conf:/root/billing/conf
+      - ../lbcore_data/billing/www:/var/www/html
     env_file:
       - system.env
       - mysql.env
@@ -37,15 +36,15 @@ services:
     ports:
       - "34012:34012"
   web:
-    image: blackojack/lanbilling:web
+    build: ./web
     restart: always
     depends_on:
       - core
     volumes:
-      - ./billing/www:/usr/local/apache2/htdocs
+      - ../lbcore_data/billing/www:/usr/local/apache2/htdocs
     env_file:
       - system.env
     networks:
       - back
     ports:
-      - "80:80"
+      - "8088:80"
