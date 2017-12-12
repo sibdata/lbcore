@@ -13,6 +13,7 @@ services:
     env_file:
       - system.env
       - mysql.env
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
     networks:
       back:
         aliases:
