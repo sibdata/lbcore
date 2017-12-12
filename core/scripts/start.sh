@@ -3,9 +3,9 @@
 if [ ! -f /root/billing/conf/billing.conf ]
 then
   echo "Началась установка биллинга"
-
   mkdir -p /root/billing/{conf,logs}
   touch /root/billing/logs/lbcore.log
+  ln -sf /dev/stdout /root/billing/logs/lbcore.log
   cp /etc/billing.conf /root/billing/conf/
   sed -i "s|database = mysql://billing:billing@127.0.0.1/billing|database = mysql://$MYSQL_USER:$MYSQL_PASSWORD@$MYSQL_HOST/$MYSQL_DATABASE|" /root/billing/conf/billing.conf
   sleep 20

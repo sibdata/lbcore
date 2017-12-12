@@ -7,4 +7,3 @@ rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
 yum install mysql expect lbcore* -y -q
 sed -i "s|logfile = ./lbcore.log|logfile = /root/billing/logs/lbcore.log|" /etc/billing.conf
 sed -i "s|listen = 127.0.0.1:1502|listen = 0.0.0.0:1502|" /etc/billing.conf
-ln -sf /dev/stdout /root/billing/logs/lbcore.log
