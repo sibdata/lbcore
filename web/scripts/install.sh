@@ -9,7 +9,7 @@ sed -i "s|max_execution_time = 30|max_execution_time = 3600|" /etc/php5/php.ini 
 && sed -i "s|date.timezone = UTC|date.timezone = $TZ|" /etc/php5/php.ini
 mkdir /run/apache2
 
-cat <<EOF >> /etc/apache2/httpd.conf
+cat <<EOF >> /etc/apache2/conf.d/client.conf
 Alias /client /usr/local/apache2/htdocs/client2/client/public/
 <Directory /usr/local/apache2/htdocs/client2/client/public/>
 Options FollowSymLinks
@@ -18,7 +18,7 @@ Require all granted
 </Directory>
 EOF
 
-cat <<EOF >> /etc/apache2/httpd.conf
+cat <<EOF >> /etc/apache2/conf.d/admin.conf
 Alias /admin /usr/local/apache2/htdocs/admin/
 <Directory /usr/local/apache2/htdocs/admin/>
 Options FollowSymLinks
@@ -32,6 +32,5 @@ sed -i "s|#ServerName www.example.com:80|ServerName localhost:80|" /etc/apache2/
 echo "ErrorLog /logs/error.log" >> /etc/apache2/httpd.conf
 
 mkdir /logs
-
 touch /logs/error.log
 ln -sf /dev/stdout /logs/error.log
