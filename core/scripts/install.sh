@@ -4,7 +4,8 @@ yum install epel-release -y -q
 mkdir -p /root/billing
 yum-config-manager --add-repo https://pkgs.lanbilling.ru/rpm/lb20/7/main/736962646174615f32/ef40a99ce87c941658eb5fc30461b49f33898ca0/lanbilling-2.0-release.repo
 rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
-yum install mysql expect lbcore* -y -q
+yum --enablerepo="lanbilling-2.0-hotfix" install lbcore* -y -q
+yum install mysql expect -y -q
 yum clean all -y -q
 mkdir /logs
 touch /logs/lbcore.log
